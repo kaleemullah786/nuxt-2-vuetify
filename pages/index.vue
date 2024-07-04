@@ -1,7 +1,8 @@
 <template>
   <main class="space-y-4 mt-4">
     <h1 class="text-xl font-bold">Users Listing</h1>
-    <v-data-table :headers="headers" :items="users" :loading="!users" :items-per-page="15" class="elevation-0">
+    <p class="italic">{{ newUsers.length }} new users registerd. Note this info is coming from users store.</p>
+    <v-data-table :headers="headers" :items="listingUsers" :loading="loading" :items-per-page="15" class="elevation-0">
       <template v-slot:item.avatar="{ item }">
         <v-avatar size="36">
       <img
@@ -30,12 +31,25 @@ export default {
         { text: 'Last Name', value: 'last_name' },
         { text: 'Email', value: 'email' },
       ],
-      users: []
+      // users: []
     }
   },
-  async fetch() {
-    const { data } = await fetch('https://reqres.in/api/users').then(res => res.json())
-    this.users = data
-  }
+  async fetch({ store }) {
+    await store.dispatch('users/fetchUsers');
+  },
+  computed: {
+    listingUsers() {
+      return this.$store.getters['users/listingUsers'];
+    },
+    newUsers() {
+      return this.$store.getters['users/newUsers'];
+    },
+    loading() {
+      return this.$store.getters['users/loading'];
+    },
+    error() {
+      return this.$store.getters['users/error'];
+    },
+  },
 }
 </script>

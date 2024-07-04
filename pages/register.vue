@@ -14,8 +14,9 @@ export default {
     methods: {
         async register(data) {
             try {
-                await this.$axios.post('/register', { ...data })
+                await this.$axios.post('/register', data)
                 await this.$auth.loginWith('local', { data });
+                this.$store.dispatch('users/addNewUser', data);                
                 this.$router.push('/');
             } catch (error) {
                 console.error(error);
