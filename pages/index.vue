@@ -1,7 +1,7 @@
 <template>
   <main class="space-y-4 mt-4">
     <h1 class="text-xl font-bold">Users Listing</h1>
-    <p class="italic">{{ newUsers.length }} new users registerd. Note this info is coming from users store.</p>
+    <p class="italic">{{ newUsers.length }} new user(s) registered. Note this info is coming from users store.</p>
     <v-data-table :headers="headers" :items="listingUsers" :loading="loading" :items-per-page="15" class="elevation-0">
       <template v-slot:item.avatar="{ item }">
         <v-avatar size="36">
