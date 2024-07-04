@@ -33,11 +33,6 @@ export default {
       users: []
     }
   },
-  methods: {
-    async fetchUsers() {
-
-    }
-  },
   async fetch() {
     const { data } = await fetch('https://reqres.in/api/users').then(res => res.json())
     this.users = data
